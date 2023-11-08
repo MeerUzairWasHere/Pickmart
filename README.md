@@ -8,7 +8,7 @@
     <a href="https://github.com/MeerUzairWasHere/Pickmart"><strong>Explore the docs »</strong></a>
     <br/>
     <br/>
-    <a href="https://github.com/MeerUzairWasHere/Pickmart">View Demo</a>
+    <a href="https://pickmart.onrender.com/">View Demo</a>
     .
     <a href="https://github.com/MeerUzairWasHere/Pickmart/issues">Report Bug</a>
     .
