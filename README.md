@@ -284,12 +284,5 @@ Distributed under the MIT License. See [LICENSE](https://github.com/MeerUzairWas
 
 ## Authors
 
-* **Mir Uzair** - ** - [Mir Uzair](https://github.com/MeerUzairWasHere) - **
-* **** - ** - []() - **
-
-## Acknowledgements
-
-* []()
-* []()
-* []()
+* **Meer Uzair** - ** - [Mir Uzair](https://github.com/MeerUzairWasHere) - **
 
