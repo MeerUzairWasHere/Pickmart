@@ -33,8 +33,8 @@ cloudinary.config({
 const connectDB = require("./db/connect");
 
 // getMiddleware
-const notFoundMiddleware = require("../starter/middleware/not-found");
-const errorHandlerMiddleware = require("../starter/middleware/error-handler");
+const notFoundMiddleware = require("./middleware/not-found");
+const errorHandlerMiddleware = require("./middleware/error-handler");
 
 //security Middlewares
 app.set("trust proxy", 1);
