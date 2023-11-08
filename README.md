@@ -1,8 +1,6 @@
 <br/>
 <p align="center">
-  <a href="https://github.com/MeerUzairWasHere/Pickmart">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+ 
 
   <h3 align="center">PICKMART API simplifies user registration, product creation, reviews, and product ordering for seamless interaction.</h3>
 
