@@ -27,10 +27,9 @@
   * [Installation](#installation)
 * [Usage](#usage)
 * [Roadmap](#roadmap)
-* [Contributing](#contributing)
 * [License](#license)
 * [Authors](#authors)
-* [Acknowledgements](#acknowledgements)
+
 
 ## About The Project
 
@@ -98,11 +97,14 @@ To set up the PickMart E-Commerce API, follow these steps:
 ```
 git clone https://github.com/your-pickmart-repo.git
 ```
+
 2. Install Dependencies: Navigate to the project directory and install the required npm packages using the following command:
+   
 ```
 cd your-pickmart-repo
 npm install
 ```
+
 3. Environment Variables: Create a .env file in the project root and add necessary environment variables, including your MongoDB connection string and any API keys required for external services like Cloudinary.
 
 4. Database Setup: Ensure your MongoDB server is up and running, and the connection details in your .env file are correct.
@@ -112,11 +114,13 @@ npm install
 ```
 npm start
 ```
+
 6. Testing: You can run tests to ensure everything is functioning correctly:
 
 ```
 npm test
 ```
+
 7. API Documentation: Explore the API documentation to understand the available endpoints and how to use them effectively
 
 ## Usage
@@ -124,6 +128,7 @@ npm test
 Once you've set up the PickMart E-Commerce API following the installation steps, you can start using it to manage users, products, reviews, and orders. Here's a brief guide on how to use the API for common tasks:
 
 User Registration and Authentication
+
 User Registration: To create a new user account, make a POST request to the registration endpoint:
 
 Endpoint: POST
@@ -188,6 +193,7 @@ Update an Order: Make a PATCH request to the specific order's endpoint to update
 Endpoint: PATCH
 URL: https://pickmart.onrender.com/api/v1/orders/:id
 Request body: Provide updated order details.
+
 Testing and Documentation
 You can use your preferred API testing tool, such as Postman, Insomnia, or any other, to interact with the PickMart API. For more detailed information on how to use each endpoint and its parameters, refer to the API documentation.
 
