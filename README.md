@@ -33,7 +33,6 @@
 
 ## About The Project
 
-![Screen Shot](images/screenshot.png)
 
 Introduction
 PickMart API is a robust and versatile E-Commerce solution that empowers developers to create and manage online marketplaces with ease. It simplifies user registration, product creation, reviews, and product ordering, providing a seamless and efficient platform for both administrators and customers.
