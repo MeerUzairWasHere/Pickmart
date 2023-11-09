@@ -52,14 +52,14 @@ The API supports a streamlined ordering process, enabling customers to add produ
 
 ## Built With
 
-NPM PACKAGES
-
+* [javascript]()
+* [nodejs]()
 * [bcryptjs]()
 * [cloudinary]()
 * [cookie-parser]()
 * [cors]()
 * [dotenv]()
-* [express]()
+* [express.js]()
 * [express-async-errors]()
 * [express-fileupload]()
 * [helmet]()
