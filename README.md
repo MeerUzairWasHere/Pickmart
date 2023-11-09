@@ -132,12 +132,18 @@ User Registration: To create a new user account, make a POST request to the regi
 
 Endpoint: POST
 URL: https://pickmart.onrender.com/api/v1/auth/register
+
 Request body: Provide the necessary user registration details.
+
+
 User Login: Use the user credentials to make a POST request to the login endpoint to receive an authentication token:
 
 Endpoint: POST
 URL: https://pickmart.onrender.com/api/v1/auth/login
+
 Request body: Enter the user's login credentials.
+
+
 User Authentication: Include the received authentication token in the headers of your subsequent requests to access protected endpoints.
 
 Product Management
@@ -145,52 +151,73 @@ View All Products: To view a list of all products, make a GET request to the pro
 
 Endpoint: GET
 URL: https://pickmart.onrender.com/api/v1/products
+
+
 View Single Product: Retrieve detailed information about a specific product by making a GET request to the single product endpoint:
 
 Endpoint: GET
 URL: https://pickmart.onrender.com/api/v1/products/:id
+
+
 Create a Product (Admin Only): If you are an admin, you can create a new product by making a POST request to the products endpoint:
 
 Endpoint: POST
 URL: https://pickmart.onrender.com/api/v1/products
+
+
 Request body: Provide product details.
 Update a Product (Admin Only): Admins can update an existing product by making a PATCH request to the product's specific endpoint:
 
 Endpoint: PATCH
 URL: https://pickmart.onrender.com/api/v1/products/:id
+
+
 Request body: Provide updated product information.
 Delete a Product (Admin Only): Admins can remove a product by making a DELETE request to the product's specific endpoint:
 
 Endpoint: DELETE
 URL: https://pickmart.onrender.com/api/v1/products/:id
+
+
 Reviews and Ratings
 Leave a Review: Customers can leave a review and a rating for a product by making a POST request to the reviews endpoint:
 
 Endpoint: POST
 URL: https://pickmart.onrender.com/api/v1/reviews
+
+
 Request body: Provide review and rating details.
 View Reviews for a Product: To see reviews for a specific product, make a GET request to the product's reviews endpoint:
 
 Endpoint: GET
 URL: https://pickmart.onrender.com/api/v1/products/:id/reviews
+
 Product Ordering
 Add Products to Cart: Customers can add products to their shopping cart by making a POST request to the orders endpoint:
 
 Endpoint: POST
 URL: https://pickmart.onrender.com/api/v1/orders
+
+
 Request body: Add product details to the cart.
 View Single Order: Retrieve detailed information about a specific order by making a GET request to the single order endpoint:
 
 Endpoint: GET
 URL: https://pickmart.onrender.com/api/v1/orders/:id
+
+
 View All User Orders: To see all orders for the currently authenticated user, make a GET request to the user's orders endpoint:
 
 Endpoint: GET
 URL: https://pickmart.onrender.com/api/v1/orders/showAllMyOrders
+
+
 Update an Order: Make a PATCH request to the specific order's endpoint to update an existing order:
 
 Endpoint: PATCH
 URL: https://pickmart.onrender.com/api/v1/orders/:id
+
+
 Request body: Provide updated order details.
 
 Testing and Documentation
