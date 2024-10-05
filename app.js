@@ -1,5 +1,8 @@
 require("dotenv").config();
 require("express-async-errors");
+const swaggerUi = require("swagger-ui-express");
+const { openApiSpec } = require("./openapispec.js");
+
 const express = require("express");
 const app = express();
 
@@ -50,7 +53,7 @@ app.use(xss());
 app.use(mongoSanitize());
 
 //useMiddlewares
-app.use(express.static("./public"));
+// app.use(express.static("./public"));
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -62,7 +65,11 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/orders", orderRouter);
+app.use("/documentation",swaggerUi.serve,swaggerUi.setup(openApiSpec))
 
+app.get("*", (req, res) => {
+  res.redirect("/documentation");
+}); // uncomment for production
 //Not found middleware
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
