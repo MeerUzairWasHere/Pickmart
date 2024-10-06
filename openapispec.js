@@ -1,441 +1,522 @@
 const openApiSpec = {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "E-Commerce API",
-      "version": "1.0.0",
-      "description": "API for managing users, products, reviews, and orders in an e-commerce application."
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Pickmart API",
+    "description": "E-Commerce store API",
+    "version": "1.1.0",
+    "contact": {
+      "name": "Mir Uzair Bashir",
+      "email": "meer.uxair007@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://pickmart.onrender.com/api/v1",
+      "description": "Live server"
     },
-    "servers": [
-      {
-        "url": "https://pickmart.onrender.com/api/v1",
-        "description": "Live server"
-      },
-      {
-        "url": "http://localhost:3000",
-        "description": "Development server"
-      },
-    ],
-    "paths": {
-      "/users": {
-        "get": {
-          "summary": "Get all users",
-          "security": [
-            {
-              "BearerAuth": []
+    // {
+    //   "url": "http://localhost:3000/api/v1",
+    //   "description": "Local development server"
+    // }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "Register a new user",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string", "example": "John Doe" },
+                  "email": { "type": "string", "format": "email", "example": "john.doe@example.com" },
+                  "password": { "type": "string", "example": "strongPassword123" }
+                },
+                "required": ["name", "email", "password"]
+              }
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "List of users",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "users": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/User"
-                        }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User registered successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": { "type": "string", "example": "User registered!" }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid input" },
+          "500": { "description": "Server Error" }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Log in an existing user",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "format": "email", "example": "john.doe@example.com" },
+                  "password": { "type": "string", "example": "strongPassword123" }
+                },
+                "required": ["email", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully logged in",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "name": { "type": "string", "example": "John Doe" },
+                        "email": { "type": "string", "example": "john.doe@example.com" }
                       }
                     }
                   }
                 }
               }
             }
-          }
-        },
-        "post": {
-          "summary": "Create a new user",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
           },
-          "responses": {
-            "201": {
-              "description": "User created successfully",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/User"
-                  }
-                }
-              }
-            }
-          }
+          "401": { "description": "Invalid credentials" },
+          "500": { "description": "Server Error" }
         }
-      },
-      "/users/showMe": {
-        "get": {
-          "summary": "Show current user",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Current user data",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/User"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/users/{id}": {
-        "get": {
-          "summary": "Get a single user by ID",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "description": "ID of the user to retrieve",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "User details",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/User"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "User not found"
-            }
-          }
-        },
-        "patch": {
-          "summary": "Update a user",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "requestBody": {
-            "required": true,
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "summary": "Log out a user",
+        "tags": ["Auth"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Successfully logged out",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "name": {
-                      "type": "string"
-                    },
-                    "email": {
-                      "type": "string",
-                      "format": "email"
-                    }
-                  },
-                  "required": ["name", "email"]
-                }
-              }
-            },
-            "responses": {
-              "200": {
-                "description": "User updated successfully"
-              }
-            }
-          }
-        }
-      },
-      "/products": {
-        "get": {
-          "summary": "Get all products",
-          "responses": {
-            "200": {
-              "description": "List of products",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Product"
-                    }
+                    "msg": { "type": "string", "example": "User logged out!" }
                   }
-                }
-              }
-            }
-          }
-        },
-        "post": {
-          "summary": "Create a new product",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
           },
-          "responses": {
-            "201": {
-              "description": "Product created successfully",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Product"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/products/{id}": {
-        "get": {
-          "summary": "Get a single product by ID",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "description": "ID of the product to retrieve",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Product details",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Product"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Product not found"
-            }
-          }
-        }
-      },
-      "/orders": {
-        "get": {
-          "summary": "Get all orders",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "List of orders",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Order"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "post": {
-          "summary": "Create a new order",
-          "security": [
-            {
-              "BearerAuth": []
-            }
-          ],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Order"
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "description": "Order created successfully",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Order"
-                  }
-                }
-              }
-            }
-          }
+          "500": { "description": "Server Error" }
         }
       }
     },
-    "components": {
-      "schemas": {
-        "User": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "email": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string"
-            },
-            "role": {
-              "type": "string",
-              "enum": ["admin", "user"]
-            }
-          },
-          "required": ["name", "email", "password"]
-        },
-        "Product": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "price": {
-              "type": "number"
-            },
-            "description": {
-              "type": "string"
-            },
-            "image": {
-              "type": "string"
-            },
-            "category": {
-              "type": "string"
-            },
-            "company": {
-              "type": "string"
-            },
-            "colors": {
-              "type": "array",
-              "items": {
-                "type": "string"
+   
+    "/products": {
+      "get": {
+        "summary": "Get all products",
+        "tags": ["Product"],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": { "type": "string", "example": "60a6f9b5b6e4a928dcb34b5a" },
+                      "name": { "type": "string", "example": "Sample Product" },
+                      "price": { "type": "number", "example": 29.99 },
+                      "description": { "type": "string", "example": "Description of the product." },
+                      "stock": { "type": "integer", "example": 100 },
+                      "createdAt": { "type": "string", "format": "date-time" }
+                    }
+                  }
+                }
               }
-            },
-            "featured": {
-              "type": "boolean"
-            },
-            "freeShipping": {
-              "type": "boolean"
-            },
-            "inventory": {
-              "type": "number"
-            },
-            "averageRating": {
-              "type": "number"
-            },
-            "numOfReviews": {
-              "type": "number"
-            },
-            "user": {
-              "type": "string"
             }
           },
-          "required": ["name", "price", "description", "category", "company"]
-        },
-        "Order": {
-          "type": "object",
-          "properties": {
-            "tax": {
-              "type": "number"
-            },
-            "shippingFee": {
-              "type": "number"
-            },
-            "subtotal": {
-              "type": "number"
-            },
-            "total": {
-              "type": "number"
-            },
-            "orderItems": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/SingleOrderItem"
+          "500": { "description": "Server Error" }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "summary": "Get a product by ID",
+        "tags": ["Product"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "The ID of the product"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product": {
+                      "type": "object",
+                      "properties": {
+                        "_id": { "type": "string", "example": "60a6f9b5b6e4a928dcb34b5a" },
+                        "name": { "type": "string", "example": "Sample Product" },
+                        "price": { "type": "number", "example": 29.99 },
+                        "description": { "type": "string", "example": "Description of the product." },
+                        "stock": { "type": "integer", "example": 100 },
+                        "createdAt": { "type": "string", "format": "date-time" }
+                      }
+                    }
+                  }
+                }
               }
-            },
-            "status": {
-              "type": "string",
-              "enum": ["pending", "failed", "paid", "delivered", "canceled"]
-            },
-            "user": {
-              "type": "string"
-            },
-            "clientSecret": {
-              "type": "string"
-            },
-            "paymentIntentId": {
-              "type": "string"
             }
           },
-          "required": ["tax", "shippingFee", "subtotal", "total", "orderItems", "user", "clientSecret"]
-        },
-        "SingleOrderItem": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "image": {
-              "type": "string"
-            },
-            "price": {
-              "type": "number"
-            },
-            "quantity": {
-              "type": "number"
-            }
-          },
-          "required": ["id", "name", "image", "price", "quantity"]
+          "404": { "description": "Product not found" },
+          "500": { "description": "Server Error" }
         }
       },
-      "securitySchemes": {
-        "BearerAuth": {
-          "type": "http",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
+    },
+    "/reviews": {
+      "post": {
+        "summary": "Create a review",
+        "tags": ["Review"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product": { "type": "string", "example": "654a45066d20553f12d8146b" },
+                  "rating": { "type": "integer", "example": 5 },
+                  "title": { "type": "string", "example": "Happy!" },
+                  "comment": { "type": "string", "example": "Excellent product!" }
+                },
+                "required": ["product", "rating", "comment"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Review created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "review": {
+                      "type": "object",
+                      "properties": {
+                        "_id": { "type": "string", "example": "60a6f9b5b6e4a928dcb34b5a" },
+                        "productId": { "type": "string", "example": "60a6f9b5b6e4a928dcb34b5a" },
+                        "rating": { "type": "integer", "example": 5 },
+                        "comment": { "type": "string", "example": "Excellent product!" },
+                        "createdAt": { "type": "string", "format": "date-time" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "description": "Server Error" }
         }
+      },
+      "get": {
+        "summary": "Get all reviews",
+        "tags": ["Review"],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched reviews",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": { "type": "string", "example": "60a6f9b5b6e4a928dcb34b5a" },
+                      "productId": { "type": "string", "example": "60a6f9b5b6e4a928dcb34b5a" },
+                      "rating": { "type": "integer", "example": 5 },
+                      "comment": { "type": "string", "example": "Excellent product!" },
+                      "createdAt": { "type": "string", "format": "date-time" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "description": "Server Error" }
+        }
+      }
+    },
+    "/reviews/{id}": {
+      "get": {
+        "summary": "Get a review by ID",
+        "tags": ["Review"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "The ID of the review"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched review",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "review": {
+                      "type": "object",
+                      "properties": {
+                        "_id": { "type": "string", "example": "60a6f9b5b6e4a928dcb34b5a" },
+                        "productId": { "type": "string", "example": "60a6f9b5b6e4a928dcb34b5a" },
+                        "rating": { "type": "integer", "example": 5 },
+                        "comment": { "type": "string", "example": "Excellent product!" },
+                        "createdAt": { "type": "string", "format": "date-time" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": { "description": "Review not found" },
+          "500": { "description": "Server Error" }
+        }
+      },
+      "delete": {
+        "summary": "Delete a review by ID",
+        "tags": ["Review"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "The ID of the review"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": { "type": "string", "example": "Review deleted successfully" }
+                  }
+                }
+              }
+            }
+          },
+          "404": { "description": "Review not found" },
+          "500": { "description": "Server Error" }
+        }
+      }
+    },
+    "/users/showMe": {
+      "get": {
+        "summary": "Shows current logged in user",
+        "tags": ["User"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Success!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                          "name": { "type": "string", "example": "John Doe" },
+                          "email": { "type": "string", "example": "john.doe@example.com" },
+                          "role": { "type": "string", "example": "user" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "Invalid credentials" },
+          "500": { "description": "Server Error" }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "summary": "Get a user by ID",
+        "tags": ["User"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "The ID of the user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "_id": { "type": "string", "example": "60a6f9b5b6e4a928dcb34b5a" },
+                        "name": { "type": "string", "example": "John Doe" },
+                        "email": { "type": "string", "example": "john.doe@example.com" },
+                        "createdAt": { "type": "string", "format": "date-time" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": { "description": "User not found" },
+          "500": { "description": "Server Error" }
+        }
+      },
+    },
+    "/users/updateUser": {
+      "patch": {
+        "summary": "Update User Info",
+        "tags": ["User"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string",  "example": "john.doe.new" },
+                  "email": { "type": "string", "format": "email", "example": "john.doe.new@example.com" },
+                },
+                "required": ["email", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated user info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                     "properties": {
+                  "name": { "type": "string",  "example": "john.doe.new" },
+                  "email": { "type": "string", "format": "email", "example": "john.doe.new@example.com" },
+                },
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "Invalid credentials" },
+          "500": { "description": "Server Error" }
+        }
+      }
+    },
+    "/users/updateUserPassword": {
+      "patch": {
+        "summary": "Update user password",
+        "tags": ["User"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "oldPassword": { "type": "string", "example": "strongPassword123" },
+                  "newPassword": { "type": "string", "example": "123123123123123123" }
+                },
+                "required": ["oldPassword", "newPassword"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated the password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "oldPassword": { "type": "string", "example": "strongPassword123" },
+                        "newPassword": { "type": "string", "example": "123123123123123123" }
+                      },
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "Invalid credentials" },
+          "500": { "description": "Server Error" }
+        }
+      }
+    },
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
-  
+};
 
   module.exports = { openApiSpec };
