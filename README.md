@@ -6,7 +6,7 @@
     <a href="https://github.com/MeerUzairWasHere/Pickmart"><strong>Explore the docs »</strong></a>
     <br/>
     <br/>
-    <a href="https://pickmart.onrender.com/" target="_blank">View Demo</a>
+    <a href="https://pickmart-g9tr.onrender.com/" target="_blank">View Demo</a>
     ·
     <a href="https://github.com/MeerUzairWasHere/Pickmart/issues">Report Bug</a>
     ·
@@ -18,15 +18,15 @@
 
 ## Table Of Contents
 
-* [About the Project](#about-the-project)
-* [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-* [Roadmap](#roadmap)
-* [License](#license)
-* [Authors](#authors)
+- [About the Project](#about-the-project)
+- [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Roadmap](#roadmap)
+- [License](#license)
+- [Authors](#authors)
 
 ## About The Project
 
@@ -35,7 +35,6 @@
 ### Key Features
 
 - **User Registration**: A user-friendly and secure process, allowing new users to sign up and create accounts easily.
-  
 - **Product Management**: Administrators can add, update, and delete products effortlessly, keeping listings accurate for customers.
 
 - **Reviews and Ratings**: Customers can leave reviews and ratings, fostering trust and informed purchasing decisions.
@@ -44,23 +43,23 @@
 
 ## Built With
 
-* [JavaScript]()
-* [Node.js]()
-* [bcryptjs]()
-* [Cloudinary]()
-* [cookie-parser]()
-* [CORS]()
-* [dotenv]()
-* [Express.js]()
-* [express-async-errors]()
-* [express-fileupload]()
-* [Helmet]()
-* [http-status-codes]()
-* [Morgan]()
-* [jsonwebtoken]()
-* [Validator]()
-* [xss-clean]()
-* [Nodemon]()
+- [JavaScript]()
+- [Node.js]()
+- [bcryptjs]()
+- [Cloudinary]()
+- [cookie-parser]()
+- [CORS]()
+- [dotenv]()
+- [Express.js]()
+- [express-async-errors]()
+- [express-fileupload]()
+- [Helmet]()
+- [http-status-codes]()
+- [Morgan]()
+- [jsonwebtoken]()
+- [Validator]()
+- [xss-clean]()
+- [Nodemon]()
 
 ## Getting Started
 
@@ -76,12 +75,12 @@ Welcome to PickMart! This guide will walk you through the essential steps to get
 
 ### Installation
 
-1. **Clone the Repository**:  
+1. **Clone the Repository**:
    ```bash
    git clone https://github.com/MeerUzairWasHere/Pickmart.git
    ```
-   
-2. **Install Dependencies**:  
+2. **Install Dependencies**:
+
    ```bash
    cd pickmart
    npm install
@@ -91,12 +90,14 @@ Welcome to PickMart! This guide will walk you through the essential steps to get
 
 4. **Database Setup**: Ensure your MongoDB is running and connected.
 
-5. **Start the Server**:  
+5. **Start the Server**:
+
    ```bash
    npm start
    ```
 
-6. **Testing**: Run tests to verify setup:  
+6. **Testing**: Run tests to verify setup:
+
    ```bash
    npm test
    ```
@@ -108,45 +109,50 @@ Welcome to PickMart! This guide will walk you through the essential steps to get
 Once PickMart is set up, you can perform tasks such as managing users, products, reviews, and orders.
 
 - **User Registration**  
-  POST: `https://pickmart.onrender.com/api/v1/auth/register`
+  POST: `https://pickmart-g9tr.onrender.com/api/v1/auth/register`
 
 - **User Login**  
-  POST: `https://pickmart.onrender.com/api/v1/auth/login`
+  POST: `https://pickmart-g9tr.onrender.com/api/v1/auth/login`
 
 - **View All Products**  
-  GET: `https://pickmart.onrender.com/api/v1/products`
+  GET: `https://pickmart-g9tr.onrender.com/api/v1/products`
 
 - **Create Product (Admin Only)**  
-  POST: `https://pickmart.onrender.com/api/v1/products`
+  POST: `https://pickmart-g9tr.onrender.com/api/v1/products`
 
 Refer to the API documentation for more details on each endpoint.
 
 ## Roadmap
 
 ### Phase 1: Core Functionality
+
 - Bug Fixes and Testing
 - User roles and permissions
 - Performance improvements
 
 ### Phase 2: Features and UX
+
 - Recommendation system
 - Enhanced product search and filtering
 - Payment gateway integration
 
 ### Phase 3: Community Engagement
+
 - Documentation and tutorials
 - Developer community forum
 
 ### Phase 4: Security and Compliance
+
 - Regular security audits
 - PCI DSS compliance
 
 ### Phase 5: Mobile Applications
+
 - Mobile apps for Android and iOS
 
 ## Contributing
 
-Contributions are what make the open-source community a great place to learn and create! Any contributions are greatly appreciated. 
+Contributions are what make the open-source community a great place to learn and create! Any contributions are greatly appreciated.
 
 1. Fork the Project
 2. Create a Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -162,4 +168,4 @@ Distributed under the MIT License. See [LICENSE](https://github.com/MeerUzairWas
 
 ## Authors
 
-* **Meer Uzair** - [GitHub](https://github.com/MeerUzairWasHere)
+- **Meer Uzair** - [GitHub](https://github.com/MeerUzairWasHere)
